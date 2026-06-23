@@ -52,6 +52,7 @@ console.log(`My name is ${person3.name}. I live in ${person3.address.city}.`);
 //interface
 interface newUser extends User {
   isActive: boolean;
+  readonly id: string;
 }
 
 const person4: newUser = {
@@ -61,6 +62,7 @@ const person4: newUser = {
     city: "Khulna",
   },
   isActive: true,
+  id: "per1234",
 };
 
 console.log(`${person4.name} activeness : ${person4.isActive}`);
