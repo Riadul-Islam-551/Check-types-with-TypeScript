@@ -1,3 +1,78 @@
+### 1. What problem does Zod solve?
+
+**Answer:**
+
+TypeScript only checks types at compile time. Zod validates data at runtime.
+
+```
+const UserSchema = z.object({  name: z.string(),  age: z.number(),});
+```
+
+This ensures data from APIs, forms, or localStorage has the expected shape before your app uses it.
+
+---
+
+### 2. What is the difference between `parse()` and `safeParse()`?
+
+**Answer:**
+
+- `parse()` throws an error if validation fails.
+- `safeParse()` returns a result object with `success`, `data`, or `error`.
+
+```
+const result = UserSchema.safeParse(data);if (result.success) {  console.log(result.data);}
+```
+
+`safeParse()` is usually preferred in production code.
+
+---
+
+### 3. Why do we use `z.infer`?
+
+**Answer:**
+
+It generates TypeScript types directly from a Zod schema.
+
+```
+const UserSchema = z.object({  name: z.string(),});type User = z.infer<typeof UserSchema>;
+```
+
+This avoids writing the same type definition twice.
+
+---
+
+### 4. How do you make a field optional or provide a default value?
+
+**Answer:**
+
+Optional:
+
+```
+const UserSchema = z.object({  age: z.number().optional(),});
+```
+
+Default:
+
+```
+const UserSchema = z.object({  isActive: z.boolean().default(true),});
+```
+
+---
+
+### 5. How do you create custom validation?
+
+**Answer:**
+
+Use `.refine()`.
+
+```
+const PasswordSchema = z.string().refine(  (value) => value.length >= 8,  {    message: "Password must be at least 8 characters",  });
+```
+
+This is useful when built-in validators are not enough.
+
+---
+
 # TypeScript Interview Guide
 
 A professional one-page reference for common TypeScript interview questions and concise answers.
